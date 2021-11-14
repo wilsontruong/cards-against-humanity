@@ -3,6 +3,19 @@ play_again = "yes"
 
 print("Welcome to Cards Against Humanity!")
 
+default_prompts = [
+                "Attention students! Principal Butthead is at home recovering from ___. We hope he'll be back soon."
+                ,"Coming soon! Batman vs. ___"
+                ,"This is gonna be the best sleepover ever. Once Mom goes to bed, it's time for ___!"
+                ,"My dad and I enjoy ___ together."
+                ,"Never fear, Captain ___ is here!"
+                ,"Kids, Dad is trying something new this week. It's called ___."
+                ,"CCN breaking news! Over half of Americans are now ___."
+                ,"Outback Steakhouse: No rules. Just ___."
+                ,"All I want for Christmas is ___."
+                ,"My favourite dinosaur is ___asaurus."
+                ]  
+
 default_prompt_answers = [
                 "A cloud that rains diarrhea","Batman in a skirt","George Washington eating an apple","A big wet kiss from Great Aunt Sharon","Eight hours of video games.","Hanging out with Zendaya","Eating a lightbulb","A burrito smoothie","Covid 19","Eating Jelly"
                 ,"The police","Blowing up the moon","Turning into a super saiyan","Canada","Australia","United States","A hot cup of tea","Dirty upperware","Phineas and Ferb","Michael Jordan's Auntie"
@@ -35,14 +48,6 @@ elif level1 == 2:
 
 else:
     exit()
-
-#  settings_choice = input("Type 1 edit a preset theme, type 2 to add a custom theme: ")
-#     while settings_choice != "1" or settings_choice != "2":
-#         settings_choice = input("Invalid Input. Type 1 edit a preset theme, type 2 to add a custom theme: ")
-    
-#     if settings_choice == "1":
-        
-#     elif settings_choice == "2":
 
 #Level 3: Theme and number of rounds selection. 
 if status == "Valid":
