@@ -70,6 +70,9 @@ if __name__ == "__main__":
         #level1 = input("Invalid Input: Type 1 to play, type 2 for settings, or type 3 to exit: ")
     theme_name_list = []
     theme_list =[]
+    write_theme_file = open("newtheme.pickle", "wb") 
+    pickle.dump(theme_list, write_theme_file)
+    write_theme_file.close()
     read_theme_file = open("newtheme.pickle","rb")
     theme_list = pickle.load(read_theme_file)
     Default_theme  = Theme('Family Friendly', [
@@ -139,9 +142,9 @@ if __name__ == "__main__":
             if themes_choice == theme.theme_name:
                 current_theme = theme
         
-        rounds_choice = int(input("Enter the number of rounds you would like to play (1 to 5): "))
-        while rounds_choice < 0 or rounds_choice > 5: 
-            rounds_choice = int(input("Invalid number of rounds. Enter the number of rounds you would like to play (1 to 5): "))
+        # rounds_choice = int(input("Enter the number of rounds you would like to play (1 to 5): "))
+        # while rounds_choice < 0 or rounds_choice > 5: 
+        #     rounds_choice = int(input("Invalid number of rounds. Enter the number of rounds you would like to play (1 to 5): "))
 
 #Game Function
 def actual_game(pn,prompts,prompt_answers):
@@ -182,17 +185,19 @@ def actual_game(pn,prompts,prompt_answers):
         for g in range(pn):
             if g != e:
                 print(players_hand[g])
-                input("Player", g, "Pick which answer you would like to use for this prompt?: (0 to 4)")
-                temp_answers.append(players_hand)
+                answer_choice = input("Player", g, "Pick which answer you would like to use for this prompt?: (0 to 4)")
+                temp_answers.append(players_hand[answer_choice])
+                players_hand[g][answer_choice]
+                players_hand[g].extend([])
             else:
                 continue
             
         funniest_answer = int(input("Which player had the funniest answer. (Note: 0 Correlates to the most left answer): "))
-    
+
     return(points)
 
 while play_again.lower() == "yes":
-    final_scores = actual_game(player_num,rounds_choice,current_theme.prompts,current_theme.answers)
+    final_scores = actual_game(player_num,current_theme.prompts,current_theme.answers)
     print("The final scores are: ", final_scores)
     play_again = input("Would you like to play again? Enter (yes/no): ")
 
