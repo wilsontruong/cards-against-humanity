@@ -1,9 +1,11 @@
+from random import randint
+
 status = "Unvalid"
 play_again = "yes"
 
 print("Welcome to Cards Against Humanity!")
 
-default_prompts = [
+family_prompts = [
                 "Attention students! Principal Butthead is at home recovering from ___. We hope he'll be back soon."
                 ,"Coming soon! Batman vs. ___"
                 ,"This is gonna be the best sleepover ever. Once Mom goes to bed, it's time for ___!"
@@ -12,18 +14,18 @@ default_prompts = [
                 ,"Kids, Dad is trying something new this week. It's called ___."
                 ,"CCN breaking news! Over half of Americans are now ___."
                 ,"Outback Steakhouse: No rules. Just ___."
-                ,"All I want for Christmas is ___."
+                ,"All I want for Christmas is ___."                    
                 ,"My favourite dinosaur is ___asaurus."
                 ]  
 
-default_prompt_answers = [
+family_prompt_answers = [
                 "A cloud that rains diarrhea","Batman in a skirt","George Washington eating an apple","A big wet kiss from Great Aunt Sharon","Eight hours of video games.","Hanging out with Zendaya","Eating a lightbulb","A burrito smoothie","Covid 19","Eating Jelly"
                 ,"The police","Blowing up the moon","Turning into a super saiyan","Canada","Australia","United States","A hot cup of tea","Dirty upperware","Phineas and Ferb","Michael Jordan's Auntie"
                 ,"Cheeto fingers","TikTok","An iPhone with a broken screen","Polar Bears","Bob the builder dancing","Dora fighting Diego","A talking lion","A Democrat","A Republican","Idiots"
                 ,"The Magic School Bus","Ramen Noodles","Spaghetti Tacos","Pizza Hat","Climate Change","Box Fort","Chevy Truck","Honda Civic","Laptop","The loose skin at the joint of the elbow called a weenus"
                 ,"Pikachu","Politics","Crying in the bathroom","A bathtub of cottage cheese","JoJo Siwa","Ninjas","Happiness","Doing Karate","A lot of money","Being a good programmer"
                 ,"A hot air balloon powered by burps","The best game ever. Fortnite.","Darth Vader","Bacon strips","The government","Ice cream","The Harlem Shake","Youtube Rewind","Eating waffles","Ariana Grande"
-                ,"A dancing toddler","BBQ chips","C++","Python","IDK IDC ANYMORE","Random Prompt answer","Chicken nuggets","This is tedious","Read if you are not cool","1980's Music"
+                ,"A dancing toddler","BBQ chips","C++","Python","Random filler answers","Random Prompt answer","Chicken nuggets","This is tedious","A Youtuber","1980's Music"
                 ]
 
 #Classes
@@ -63,29 +65,50 @@ if status == "Valid":
     while rounds_choice < 0 or rounds_choice > 5: 
         rounds_choice = int(input("Invalid number of rounds. Enter the number of rounds you would like to play (1 to 5): "))
 
-
-
 #Game Function
-def actual_game(pn,rn):
+def actual_game(pn,rn,prompts,prompt_answers):
     players = []
+    players_hand = []
+    copied_answers = prompt_answers.copy()
+    copied_prompts = prompts.copy()
+    points = []
+    temp_answers = []
 
-    for i in range(rn):
-        for j in range(pn):
+    for a in range(pn):
+        players.append("player_"+str(a))
+    
+    for b in range(pn):
+        players_hand.append([])
+
+    for z in range(pn):
+        players_hand.append(0)
+
+    #Hands out 5 cards to each player
+    x = len(copied_answers)
+    for c in range(pn):
+        for d in range(5):
+            temp = randint(0,x-1)
+            x = x - 1
+            players_hand[c].extend(copied_answers[temp])
+            del copied_answers[temp]
+
+
+    y = len(copied_prompts)
+    for e in range(rn):
+        temp2 = randint(0,y-1)
+        y = y - 1
+        print(copied_prompts[temp2])
+        for g in range(pn):
+            print("hi")
+
+    return(points)
 
 while play_again.lower() == "yes":
-    actual_game(player_num,rounds_choice)
-    play_again = input("Would you like to play again? Enter (yes or no)")
+    final_score = actual_game(player_num,rounds_choice,,)
+    print("The final scores are: " + final_scores)
+    play_again = input("Would you like to play again? Enter (yes/no): ")
 
 #Finish Game
-if play_again == "no":
+if play_again.lower() == "no":
     print("Thanks for playing Cards Against Humanity!")
     exit()
-
-
-
-
-
-
-
-
-
