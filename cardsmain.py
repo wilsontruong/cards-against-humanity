@@ -143,50 +143,60 @@ if __name__ == "__main__":
         while rounds_choice < 0 or rounds_choice > 5: 
             rounds_choice = int(input("Invalid number of rounds. Enter the number of rounds you would like to play (1 to 5): "))
 
-    #Game Function
-    def actual_game(pn,rn,prompts,prompt_answers):
-        import copy
-        players = []
-        players_hand = []
-        copied_answers = prompt_answers.copy()
-        copied_prompts = prompts.copy()
-        points = []
+#Game Function
+def actual_game(pn,prompts,prompt_answers):
+    import copy
+    players = []
+    players_hand = []
+    copied_answers = prompt_answers.copy()
+    copied_prompts = prompts.copy()
+    points = []
+    temp_answers = []
+
+    for a in range(pn):
+        players.append("player_"+str(a))
+    
+    for b in range(pn):
+        players_hand.append([])
+
+    for z in range(pn):
+        points.append(0)
+
+    #Hands out 5 cards to each player
+    x = len(copied_answers)
+    for c in range(pn):
+        for d in range(5):
+            temp = randint(0,x-1)
+            x = x - 1
+            players_hand[c].extend(copied_answers[temp])
+            del copied_answers[temp]
+
+    funniest_answer = " "
+
+    y = len(copied_prompts)
+    for e in range(pn):
         temp_answers = []
+        temp2 = randint(0,y-1)
+        y = y - 1
+        print(copied_prompts[temp2])
+        for g in range(pn):
+            if g != e:
+                print(players_hand[g])
+                input("Player", g, "Pick which answer you would like to use for this prompt?: (0 to 4)")
+                temp_answers.append(players_hand)
+            else:
+                continue
+            
+        funniest_answer = int(input("Which player had the funniest answer. (Note: 0 Correlates to the most left answer): "))
+    
+    return(points)
 
-        for a in range(pn):
-            players.append("player_"+str(a))
-        
-        for b in range(pn):
-            players_hand.append([])
+while play_again.lower() == "yes":
+    final_scores = actual_game(player_num,rounds_choice,current_theme.prompts,current_theme.answers)
+    print("The final scores are: ", final_scores)
+    play_again = input("Would you like to play again? Enter (yes/no): ")
 
-        for z in range(pn):
-            players_hand.append(0)
-
-        #Hands out 5 cards to each player
-        x = len(copied_answers)
-        for c in range(pn):
-            for d in range(5):
-                temp = randint(0,x-1)
-                x = x - 1
-                players_hand[c].extend(copied_answers[temp])
-                del copied_answers[temp]
-
-        y = len(copied_prompts)
-        for e in range(rn):
-            temp2 = randint(0,y-1)
-            y = y - 1
-            print(copied_prompts[temp2])
-            for g in range(pn):
-                print("hi")
-
-        return(points)
-
-    while play_again.lower() == "yes":
-        final_scores = actual_game(player_num,rounds_choice,current_theme.prompts,current_theme.answers)
-        print("The final scores are: ", final_scores)
-        play_again = input("Would you like to play again? Enter (yes/no): ")
-
-    #Finish Game
-    if play_again.lower() == "no":
-        print("Thanks for playing Cards Against Humanity!")
-        exit()
+#Finish Game
+if play_again.lower() == "no":
+    print("Thanks for playing Cards Against Humanity!")
+    exit()
