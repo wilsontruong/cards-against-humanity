@@ -1,4 +1,5 @@
 import time
+
 class Theme():
     def __init__(self,theme_name='', prompts=[], answers=[],num_players = 3):
         self.theme_name = theme_name
@@ -55,16 +56,21 @@ class Theme():
     def set_default_theme():
         pass
     
+          
 
 
-            
-
-
-
-Custom_Theme = Theme(3)
-Custom_Theme.set_theme_name()
-Custom_Theme.set_prompt()
-Custom_Theme.set_answers()
+import pickle
+x = ['Family Friendly']
+theme_list =[]
+print("we are creating a new theme")
+theme_list.append(Theme(3))
+theme_list[-1].set_theme_name()
+x.append(t[-1].theme_name)
+theme_list[-1].set_prompt()
+theme_list[-1].set_answers()  
+custom_theme_file = open("newtheme.pickle", "wb") 
+pickle.dump(t[-1], custom_theme_file)
+custom_theme_file.close()
 
 
 
