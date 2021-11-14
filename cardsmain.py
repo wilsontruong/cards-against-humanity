@@ -156,43 +156,46 @@ def actual_game(pn,prompts,prompt_answers):
     points = []
     temp_answers = []
 
-    for a in range(pn):
+    for a in range(0,pn):
         players.append("player_"+str(a))
     
-    for b in range(pn):
+    for b in range(0,pn):
         players_hand.append([])
 
-    for z in range(pn):
+    for z in range(0,pn):
         points.append(0)
 
     #Hands out 5 cards to each player
+    # print("TESSSST")
+    # print(copied_answers)
+    # print(players_hand)
     x = len(copied_answers)
-    for c in range(pn):
+    for c in range(0,pn):
         for d in range(5):
             temp = randint(0,x-1)
             x = x - 1
-            players_hand[c].extend(copied_answers[temp])
+            players_hand[c].append(copied_answers[temp])
             del copied_answers[temp]
 
     funniest_answer = " "
 
     y = len(copied_prompts)
-    for e in range(pn):
+    for e in range(0, pn):
         temp_answers = []
         temp2 = randint(0,y-1)
         y = y - 1
         print(copied_prompts[temp2])
-        for g in range(pn):
+        for g in range(0, pn):
             if g != e:
                 print(players_hand[g])
-                answer_choice = input("Player", g, "Pick which answer you would like to use for this prompt?: (0 to 4)")
+                answer_choice = int(input("Player " + str(g) + ", pick which answer you would like to use for this prompt? (0 to 4): "))
                 temp_answers.append(players_hand[answer_choice])
-                players_hand[g][answer_choice]
-                players_hand[g].extend([])
+                del players_hand[g][answer_choice]
+                players_hand[g].append(copied_answers[randint(0,y-1)])
             else:
                 continue
             
-        funniest_answer = int(input("Which player had the funniest answer. (Note: 0 Correlates to the most left answer): "))
+        funniest_answer = int(input("Which player had the funniest answer. (Note: 0 Correlates to the most left answer and 4 correlates to the most right): "))
 
     return(points)
 
